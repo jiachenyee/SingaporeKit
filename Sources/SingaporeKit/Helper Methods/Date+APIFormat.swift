@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Date+APIFormat.swift
 //  SingaporeKit
 //
 //  Created by Jia Chen Yee on 10/21/24.
@@ -9,7 +9,7 @@ import Foundation
 
 extension Date {
     func formatForAPI(withTime: Bool) -> String {
-        var calendar = Calendar.singapore
+        let calendar = Calendar.singapore
         
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second],
                                                  from: self)
@@ -41,5 +41,15 @@ extension Date {
     
     private func addLeadingZeros(_ value: Int, numberOfDigits: Int) -> String {
         return String(format: "%0\(numberOfDigits)d", value)
+    }
+    
+    init?(iso8601Timestamp: String) {
+        let isoFormatter = ISO8601DateFormatter()
+        
+        if let date = isoFormatter.date(from: iso8601Timestamp) {
+            self = date
+        } else {
+            return nil
+        }
     }
 }

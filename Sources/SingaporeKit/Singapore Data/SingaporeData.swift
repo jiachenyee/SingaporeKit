@@ -13,5 +13,7 @@ public class SingaporeData {
     /// Get relative humidity readings across Singapore
     public var relativeHumidity: SingaporeDataResult<RelativeHumidity> = .none
     
+    public var twentyFourHourWeather: SingaporeDataResult<[TwentyFourHourWeather.Record]> = .none
+    
     internal var dateOption: DateOption?
 }

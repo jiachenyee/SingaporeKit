@@ -25,9 +25,7 @@ public struct Singapore<Value>: DynamicProperty where Value: SingaporeDataValue 
     public init(_ keyPath: KeyPath<SingaporeData, Value>) {
         self.keyPath = keyPath
         
-        if keyPath.debugDescription.contains("relativeHumidity") {
-            singaporeData.fetchRelativeHumidity()
-        }
+        fetchData()
     }
     
     public init(_ keyPath: KeyPath<SingaporeData, Value>,
@@ -38,8 +36,16 @@ public struct Singapore<Value>: DynamicProperty where Value: SingaporeDataValue 
             singaporeData.dateOption = options
         }
         
-        if keyPath.debugDescription.contains("relativeHumidity") {
-            singaporeData.fetchRelativeHumidity()
+        fetchData()
+    }
+    
+    func fetchData() {
+        Task {
+            if keyPath.debugDescription.contains("relativeHumidity") {
+                await singaporeData.fetchRelativeHumidity()
+            } else if keyPath.debugDescription.contains("twentyFourHourWeather") {
+                await singaporeData.fetch24hWeather()
+            }
         }
     }
     
