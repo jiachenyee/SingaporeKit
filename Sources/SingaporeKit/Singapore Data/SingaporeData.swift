@@ -15,6 +15,8 @@ public class SingaporeData {
     
     public var airTemperature: SingaporeDataResult<EnvironmentData> = .none
     
+    public var rainfall: SingaporeDataResult<EnvironmentData> = .none
+    
     public var twentyFourHourWeather: SingaporeDataResult<[TwentyFourHourWeather.Record]> = .none
     
     public var carparkAvailability: SingaporeDataResult<CarparkAvailability> = .none
