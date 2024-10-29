@@ -60,8 +60,8 @@ struct RelativeHumidityView: View {
 - [x] rainfall
 - [x] psi
 - [x] uvi
+- [x] traffic images
 - [ ] 4 day forecast
-- [ ] traffic images
 - [ ] taxi
 - [ ] 2h forecast
 
