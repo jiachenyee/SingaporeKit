@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SingaporeData+EnvironmentData.swift
 //  SingaporeKit
 //
 //  Created by Jia Chen Yee on 10/29/24.
@@ -8,11 +8,6 @@
 import Foundation
 
 extension SingaporeData {
-    func fetchAirTemperature() async {
-        airTemperature = .loading
-        airTemperature = await fetchEnvironmentData(dataset: "air-temperature")
-    }
-    
     func fetchEnvironmentData(dataset: String) async -> SingaporeDataResult<EnvironmentData> {
         let date = (dateOption ?? .now).date()
         

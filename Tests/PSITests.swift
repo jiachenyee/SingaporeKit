@@ -1,5 +1,5 @@
 //
-//  RainfallTests.swift
+//  PSITests.swift
 //  SingaporeKit
 //
 //  Created by Jia Chen Yee on 10/29/24.
@@ -9,32 +9,32 @@ import Foundation
 import Testing
 @testable import SingaporeKit
 
-@Test("Rainfall Valid Configurations", arguments: [
+@Test("PSI Valid Configurations", arguments: [
     nil,
     DateOption.now,
     DateOption.today,
     DateOption.day(.now.addingTimeInterval(-86400)), // Yesterday
     DateOption.moment(.now.addingTimeInterval(-86400)) // Yesterday Moment
 ])
-func rainfallValid(dateOption: DateOption?) async throws {
+func psiValid(dateOption: DateOption?) async throws {
     let singapore = await SingaporeData()
     
     await MainActor.run {
         singapore.dateOption = dateOption
     }
     
-    await singapore.fetchRainfall()
+    await singapore.fetchPSI()
     
-    switch await singapore.rainfall {
-    case .loading, .none: #expect(Bool(false), "Fetching rainfall failed")
-    case .failure(let error): #expect(Bool(false), "Fetching rainfall failed with error: \(error)")
-    case .success(let rf):
-        #expect(!rf.readings.isEmpty)
-        #expect(!rf.stations.isEmpty)
+    switch await singapore.psi {
+    case .loading, .none: #expect(Bool(false), "Fetching air temperature failed")
+    case .failure(let error): #expect(Bool(false), "Fetching air temperature failed with error: \(error)")
+    case .success(let at):
+        #expect(!at.readings.isEmpty)
+        #expect(!at.stations.isEmpty)
     }
 }
 
-@Test("Rainfall Invalid Configurations", arguments: [
+@Test("PSI Invalid Configurations", arguments: [
     DateOption.day(.now.addingTimeInterval(86400)), // Tomorrow
     DateOption.moment(.now.addingTimeInterval(86400)), // Tomorrow Moment
     DateOption.day(.distantPast),
@@ -42,17 +42,17 @@ func rainfallValid(dateOption: DateOption?) async throws {
     DateOption.day(.distantFuture),
     DateOption.moment(.distantFuture)
 ])
-func rainfallInvalid(dateOption: DateOption?) async throws {
+func psiInvalid(dateOption: DateOption?) async throws {
     let singapore = await SingaporeData()
     
     await MainActor.run {
         singapore.dateOption = dateOption
     }
     
-    await singapore.fetchRainfall()
+    await singapore.fetchPSI()
     
-    switch await singapore.rainfall {
-    case .loading, .none: #expect(Bool(false), "Fetching rainfall failed")
+    switch await singapore.psi {
+    case .loading, .none: #expect(Bool(false), "Fetching air temperature failed")
     case .failure(let error):
         print(error)
         #expect(true)

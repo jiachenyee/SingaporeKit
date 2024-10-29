@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  CarparkAvailability+RetrievedData.swift
 //  SingaporeKit
 //
 //  Created by Jia Chen Yee on 10/29/24.
