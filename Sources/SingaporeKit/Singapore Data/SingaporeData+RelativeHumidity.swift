@@ -58,7 +58,7 @@ extension SingaporeData {
         
         let (response, status) = try await URLSession.shared.data(from: url)
         
-        guard let status = status as? HTTPURLResponse else { throw URLError(.badServerResponse) }
+        guard let status = status as? HTTPURLResponse, status.statusCode == 200 else { throw URLError(.badServerResponse) }
         
         let receivedResponse = try JSONDecoder().decode(ResponseWrapper<RelativeHumidity.RetrievedData>.self,
                                                         from: response)

@@ -15,5 +15,7 @@ public class SingaporeData {
     
     public var twentyFourHourWeather: SingaporeDataResult<[TwentyFourHourWeather.Record]> = .none
     
+    public var carparkAvailability: SingaporeDataResult<CarparkAvailability> = .none
+    
     internal var dateOption: DateOption?
 }
