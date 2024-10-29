@@ -53,6 +53,8 @@ public struct Singapore<Value>: DynamicProperty where Value: SingaporeDataValue 
                 await singaporeData.fetchRainfall()
             } else if keyPath.debugDescription.contains("psi") {
                 await singaporeData.fetchPSI()
+            } else if keyPath.debugDescription.contains("uvIndex") {
+                await singaporeData.fetchUVIndex()
             }
         }
     }
