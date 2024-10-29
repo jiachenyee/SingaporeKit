@@ -75,9 +75,6 @@ public extension TwentyFourHourWeather {
 
 extension Array where Element == TwentyFourHourWeather.Record {
     public var current: TwentyFourHourWeather.Record? {
-        print(map {
-            $0.date
-        })
         return first {
             Calendar.singapore.isDateInToday($0.date)
         }

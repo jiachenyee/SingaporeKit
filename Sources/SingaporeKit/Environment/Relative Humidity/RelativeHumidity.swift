@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct RelativeHumidity: SingaporeDataValue, Sendable {
+public struct EnvironmentData: SingaporeDataValue, Sendable {
     public typealias DataOption = DateOption
     
     public let stations: [Station]
@@ -16,7 +16,6 @@ public struct RelativeHumidity: SingaporeDataValue, Sendable {
     public let readingUnit: String
     
     public func latestReading(for station: Station) -> Double? {
-        
         let sortedReadings = readings.sorted(by: { $0.timestamp > $1.timestamp })
         
         for reading in sortedReadings {

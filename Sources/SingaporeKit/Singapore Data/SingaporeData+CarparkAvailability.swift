@@ -11,7 +11,7 @@ extension SingaporeData {
     func fetchCarparkAvailability() async {
         carparkAvailability = .loading
         
-        let date = (dateOption ?? .now).date()
+        let date = (momentOption ?? .now).date()
         
         do {
             let result = try await sendCarparkAvailabilityRequest(date: date)

@@ -11,11 +11,14 @@ import Foundation
 @Observable
 public class SingaporeData {
     /// Get relative humidity readings across Singapore
-    public var relativeHumidity: SingaporeDataResult<RelativeHumidity> = .none
+    public var relativeHumidity: SingaporeDataResult<EnvironmentData> = .none
+    
+    public var airTemperature: SingaporeDataResult<EnvironmentData> = .none
     
     public var twentyFourHourWeather: SingaporeDataResult<[TwentyFourHourWeather.Record]> = .none
     
     public var carparkAvailability: SingaporeDataResult<CarparkAvailability> = .none
     
     internal var dateOption: DateOption?
+    internal var momentOption: MomentOption?
 }

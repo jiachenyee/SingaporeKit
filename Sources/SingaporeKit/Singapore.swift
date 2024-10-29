@@ -45,6 +45,10 @@ public struct Singapore<Value>: DynamicProperty where Value: SingaporeDataValue 
                 await singaporeData.fetchRelativeHumidity()
             } else if keyPath.debugDescription.contains("twentyFourHourWeather") {
                 await singaporeData.fetch24hWeather()
+            } else if keyPath.debugDescription.contains("carparkAvailability") {
+                await singaporeData.fetchCarparkAvailability()
+            } else if keyPath.debugDescription.contains("airTemperature") {
+                await singaporeData.fetchAirTemperature()
             }
         }
     }
