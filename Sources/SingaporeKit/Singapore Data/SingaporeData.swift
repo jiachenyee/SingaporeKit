@@ -25,6 +25,8 @@ public class SingaporeData {
     
     public var carparkAvailability: SingaporeDataResult<CarparkAvailability> = .none
     
+    public var trafficImages: SingaporeDataResult<TrafficImages> = .none
+    
     internal var dateOption: DateOption?
     internal var momentOption: MomentOption?
 }

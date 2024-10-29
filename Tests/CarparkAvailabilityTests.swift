@@ -31,7 +31,7 @@ func carparkAvailabilityValid(momentOption: MomentOption?) async throws {
     }
 }
 
-@Test("Carpark Availability Valid Configurations", arguments: [
+@Test("Carpark Availability Invalid Configurations", arguments: [
     MomentOption.at(.distantPast),
     MomentOption.at(.distantFuture),
     MomentOption.at(.now.addingTimeInterval(86400)) // tomorrow,

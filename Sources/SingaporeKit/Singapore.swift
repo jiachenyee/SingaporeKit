@@ -49,6 +49,7 @@ public struct Singapore<Value>: DynamicProperty where Value: SingaporeDataValue 
             case \.rainfall: await singaporeData.fetchRainfall()
             case \.psi: await singaporeData.fetchPSI()
             case \.uvIndex: await singaporeData.fetchUVIndex()
+            case \.trafficImages: await singaporeData.fetchTrafficImages()
             default: break
             }
         }
