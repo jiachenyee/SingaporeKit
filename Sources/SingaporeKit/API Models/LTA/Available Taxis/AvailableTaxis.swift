@@ -10,9 +10,9 @@ import Foundation
 public struct AvailableTaxis: Decodable, Sendable, SingaporeDataValue {
     public typealias DataOption = MomentOption
     
-    var timestamp: Date
-    var taxiCount: Int
-    var locations: [Location]
+    public var timestamp: Date
+    public var taxiCount: Int
+    public var locations: [Location]
 
     public init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
