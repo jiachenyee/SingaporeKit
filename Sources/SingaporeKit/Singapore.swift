@@ -41,20 +41,15 @@ public struct Singapore<Value>: DynamicProperty where Value: SingaporeDataValue 
     
     func fetchData() {
         Task {
-            if keyPath.debugDescription.contains("relativeHumidity") {
-                await singaporeData.fetchRelativeHumidity()
-            } else if keyPath.debugDescription.contains("twentyFourHourWeather") {
-                await singaporeData.fetch24hWeather()
-            } else if keyPath.debugDescription.contains("carparkAvailability") {
-                await singaporeData.fetchCarparkAvailability()
-            } else if keyPath.debugDescription.contains("airTemperature") {
-                await singaporeData.fetchAirTemperature()
-            } else if keyPath.debugDescription.contains("rainfall") {
-                await singaporeData.fetchRainfall()
-            } else if keyPath.debugDescription.contains("psi") {
-                await singaporeData.fetchPSI()
-            } else if keyPath.debugDescription.contains("uvIndex") {
-                await singaporeData.fetchUVIndex()
+            switch keyPath {
+            case \.relativeHumidity: await singaporeData.fetchRelativeHumidity()
+            case \.twentyFourHourWeather: await singaporeData.fetch24hWeather()
+            case \.carparkAvailability: await singaporeData.fetchCarparkAvailability()
+            case \.airTemperature: await singaporeData.fetchAirTemperature()
+            case \.rainfall: await singaporeData.fetchRainfall()
+            case \.psi: await singaporeData.fetchPSI()
+            case \.uvIndex: await singaporeData.fetchUVIndex()
+            default: break
             }
         }
     }
