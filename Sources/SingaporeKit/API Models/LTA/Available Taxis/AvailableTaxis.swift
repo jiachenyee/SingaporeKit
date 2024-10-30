@@ -24,7 +24,7 @@ public struct AvailableTaxis: Decodable, Sendable, SingaporeDataValue {
         }
         
         locations = feature.geometry.coordinates.map {
-            Location(latitude: $0[0], longitude: $0[1])
+            Location(latitude: $0[1], longitude: $0[0])
         }
         
         taxiCount = feature.properties.taxiCount

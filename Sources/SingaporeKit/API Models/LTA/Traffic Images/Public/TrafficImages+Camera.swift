@@ -8,18 +8,18 @@
 import Foundation
 
 public extension TrafficImages {
-    struct Camera: Sendable, Decodable {
+    struct Camera: Sendable, Decodable, Identifiable {
         public var timestamp: Date
         public var image: URL
         public var location: Location
-        public var cameraID: String
+        public var id: String
         public var metadata: ImageMetadata
         
         enum CodingKeys: String, CodingKey {
             case timestamp
             case image
             case location
-            case cameraID = "camera_id"
+            case id = "camera_id"
             case metadata = "image_metadata"
         }
         
@@ -29,7 +29,7 @@ public extension TrafficImages {
             self.timestamp = try Date.decode(from: container, forKey: .timestamp)
             self.image = try container.decode(URL.self, forKey: CodingKeys.image)
             self.location = try container.decode(Location.self, forKey: CodingKeys.location)
-            self.cameraID = try container.decode(String.self, forKey: CodingKeys.cameraID)
+            self.id = try container.decode(String.self, forKey: CodingKeys.id)
             self.metadata = try container.decode(ImageMetadata.self, forKey: CodingKeys.metadata)
         }
     }
