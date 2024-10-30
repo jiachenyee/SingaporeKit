@@ -52,19 +52,5 @@ struct RelativeHumidityView: View {
 ```
 
 ## roadmap
-### features
-- [x] relative humidity
-- [x] 24h forecast
-- [x] carpark availability
-- [x] air temperature
-- [x] rainfall
-- [x] psi
-- [x] uvi
-- [x] traffic images
-- [x] taxi
-- [x] 2h forecast
-- [ ] 4 day forecast
-
-### others
 - [ ] docc documentation
 - [ ] sample projects
