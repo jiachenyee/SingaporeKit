@@ -18,7 +18,7 @@ extension SingaporeData {
             repeat {
                 let currentPageResult = try await sendEnvironmentReadingRequest(date: date,
                                                                                 withToken: token,
-                                                                                dataset: "air-temperature")
+                                                                                dataset: dataset)
                 
                 if result == nil {
                     result = currentPageResult
