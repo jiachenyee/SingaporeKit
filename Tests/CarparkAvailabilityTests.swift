@@ -50,8 +50,10 @@ struct CarparkAvailabilityTests {
         switch await singapore.carparkAvailability {
         case .loading, .none: #expect(Bool(false), "Fetching carpark availability failed")
         case .failure(let error):
-            print(error.localizedDescription)
-            #expect(Bool(true))
+            switch error {
+            case .notFound: #expect(true)
+            default: #expect(Bool(false), "Unexpected error: \(error)")
+            }
         case .success: #expect(Bool(false), "Expected to receive no result")
         }
     }

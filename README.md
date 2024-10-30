@@ -62,8 +62,8 @@ struct RelativeHumidityView: View {
 - [x] uvi
 - [x] traffic images
 - [x] taxi
+- [x] 2h forecast
 - [ ] 4 day forecast
-- [ ] 2h forecast
 
 ### others
 - [ ] docc documentation

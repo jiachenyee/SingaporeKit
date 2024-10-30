@@ -50,8 +50,10 @@ struct AvailableTaxiTests {
         switch await singapore.availableTaxis {
         case .loading, .none: #expect(Bool(false), "Fetching 24h weather failed")
         case .failure(let error):
-            print(error)
-            #expect(true)
+            switch error {
+            case .apiError: #expect(true)
+            default: #expect(Bool(false), "Unexpected error: \(error)")
+            }
         case .success: #expect(Bool(false), "Expected to receive no result")
         }
     }

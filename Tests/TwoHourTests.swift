@@ -59,7 +59,6 @@ struct TwoHourTests {
             case .notFound: #expect(true)
             default: #expect(Bool(false), "Unexpected error: \(error)")
             }
-            #expect(true)
         case .success: #expect(Bool(false), "Expected to receive no result")
         }
     }

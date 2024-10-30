@@ -1,33 +1,15 @@
 //
-//  SingaporeData+TrafficImages.swift
+//  SingaporeData+GenericRequest.swift
 //  SingaporeKit
 //
-//  Created by Jia Chen Yee on 10/29/24.
+//  Created by Jia Chen Yee on 10/30/24.
 //
 
 import Foundation
 
 extension SingaporeData {
-    func fetchTrafficImages() async {
-        trafficImages = .loading
-        
-        let date = (momentOption ?? .now).date()
-        
-        do {
-            let result = try await sendTrafficImaegsRequest(date: date)
-            
-            if let trafficImages = result.items.first {
-                self.trafficImages = .success(trafficImages)
-            } else {
-                self.trafficImages = .failure(Error.notFound(nil))
-            }
-        } catch {
-            trafficImages = .failure(error)
-        }
-    }
-    
-    fileprivate func sendTrafficImaegsRequest(date: String) async throws(Error) -> TrafficImages.RetrievedData {
-        var url = URL(string: "https://api.data.gov.sg/v1/transport/traffic-images")!
+    func sendGenericRequest<RetrievedData: Decodable>(date: String, endpoint: String) async throws(Error) -> RetrievedData {
+        var url = URL(string: "https://api.data.gov.sg/v1/transport/\(endpoint)")!
         
         let queryItems: [URLQueryItem] = [
             URLQueryItem(name: "date_time", value: date),
@@ -41,12 +23,12 @@ extension SingaporeData {
             guard let status = status as? HTTPURLResponse else { throw Error.unexpectedServerResponse }
             
             if status.statusCode == 200 {
-                let receivedResponse = try JSONDecoder().decode(TrafficImages.RetrievedData.self,
+                let receivedResponse = try JSONDecoder().decode(RetrievedData.self,
                                                                 from: data)
                 
                 return receivedResponse
             } else {
-                let error = try JSONDecoder().decode(TrafficImages.ErrorResponse.self,
+                let error = try JSONDecoder().decode(ErrorResponse.self,
                                                      from: data)
                 
                 if status.statusCode == 404 {
