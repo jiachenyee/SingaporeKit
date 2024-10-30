@@ -1,18 +1,31 @@
-# @Singapore [WIP]
-## access [singapore government real-time data](https://data.gov.sg/datasets?formats=API) in swiftui, in an easy and succinct way
-use the `@Singapore` property wrapper to access singapore government data
+# `@Singapore`
+SingaoreKit makes it easy to use Singapore government data within your SwiftUI projects. Using the `@Singapore` property wrapper, you can retrieve real-time government data from [data.gov.sg](https://data.gov.sg/datasets?formats=API).
 
-### the property wrapper
+## using `@Singapore`
+Use the `@Singapore` property wrapper to retrieve any [data.gov.sg real-time API](https://data.gov.sg/datasets?formats=API) value.
 ```swift
+// Environment-Related
+@Singapore(\.relativeHumidity) var relativeHumidity
+@Singapore(\.twentyFourHourWeather) var twentyFourHourWeather
+@Singapore(\.airTemperature) var airTemperature
+@Singapore(\.rainfall) var rainfall
+@Singapore(\.psi) var psi
 @Singapore(\.uvIndex) var uvIndex
+@Singapore(\.twoHourWeather) var twoHourWeather
+@Singapore(\.fourDayForecast) var fourDayForecast
+
+// Transport-Related
 @Singapore(\.carparkAvailability) var carparkAvailability
-```
-you can also supply an option, such as a date.
-```swift
-@Singapore(\.rainfall, options: .moment(yesterday)) var uvIndex
+@Singapore(\.trafficImages) var trafficImages
+@Singapore(\.availableTaxis) var availableTaxis
 ```
 
-### here's an example
+You can also supply an option, such as a date, to retrieve data for a specific date / moment.
+```swift
+@Singapore(\.rainfall, options: .moment(.now.addingTimeInterval(-86400))) var uvIndex
+```
+
+Here's an example of how you can retrieve the value of a given property.
 ```swift
 struct RelativeHumidityView: View {
     
