@@ -52,4 +52,20 @@ extension Date {
             return nil
         }
     }
+    
+    static func decode<CodingKey>(from container: KeyedDecodingContainer<CodingKey>, forKey key: CodingKey) throws -> Date {
+        var dateString = try container.decode(String.self, forKey: key)
+        
+        if !dateString.contains("T") {
+            dateString += "T00:00:00+08:00"
+        } else if !dateString.contains("+0") {
+            dateString += "+08:00"
+        }
+        
+        guard let date = Date(iso8601Timestamp: dateString) else {
+            throw DecodingError.dataCorruptedError(forKey: key, in: container, debugDescription: "Invalid ISO8601 string found: \(dateString)")
+        }
+        
+        return date
+    }
 }

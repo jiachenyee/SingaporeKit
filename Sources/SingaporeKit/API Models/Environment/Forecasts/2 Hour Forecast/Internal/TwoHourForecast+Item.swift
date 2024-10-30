@@ -9,8 +9,8 @@ import Foundation
 
 extension TwoHourForecast {
     struct Item: Decodable {
-        let lastUpdated: String
-        let timestamp: String
+        let lastUpdated: Date
+        let timestamp: Date
         let validPeriod: ValidPeriod
         let forecasts: [Forecast]
         
@@ -35,6 +35,15 @@ extension TwoHourForecast {
                                         forecast: forecast.weather,
                                         location: areaMetadata?.location)
             }))
+        }
+        
+        init(from decoder: any Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.lastUpdated = try Date.decode(from: container, forKey: .lastUpdated)
+            self.timestamp = try Date.decode(from: container, forKey: .timestamp)
+            self.validPeriod = try container.decode(ValidPeriod.self, forKey: .validPeriod)
+            self.forecasts = try container.decode([TwoHourForecast.Forecast].self, forKey: .forecasts)
         }
     }
 }

@@ -20,13 +20,8 @@ public struct TrafficImages: Sendable, SingaporeDataValue, Decodable {
     
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let timestampString = try container.decode(String.self, forKey: .timestamp)
         
-        guard let timestamp = Date(iso8601Timestamp: timestampString) else {
-            throw DecodingError.dataCorruptedError(forKey: .timestamp, in: container, debugDescription: "Invalid timestamp: \(timestampString)")
-        }
-        
-        self.timestamp = timestamp
+        self.timestamp = try Date.decode(from: container, forKey: .timestamp)
         self.cameras = try container.decode([TrafficImages.Camera].self, forKey: .cameras)
     }
 }

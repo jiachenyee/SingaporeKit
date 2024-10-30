@@ -26,13 +26,7 @@ public extension CarparkAvailability {
             self.number = try container.decode(String.self, forKey: CarparkAvailability.Carpark.CodingKeys.number)
             self.lots = try container.decode([CarparkAvailability.CarparkLots].self, forKey: CarparkAvailability.Carpark.CodingKeys.lots)
             
-            let lastUpdatedString = try container.decode(String.self, forKey: CarparkAvailability.Carpark.CodingKeys.lastUpdated) + "+08:00"
-            
-            guard let lastUpdated = Date(iso8601Timestamp: lastUpdatedString) else {
-                throw DecodingError.dataCorruptedError(forKey: .lastUpdated, in: container, debugDescription: "Failed to decode last updated timestamp")
-            }
-            
-            self.lastUpdated = lastUpdated
+            self.lastUpdated = try Date.decode(from: container, forKey: .lastUpdated)
         }
     }
 }

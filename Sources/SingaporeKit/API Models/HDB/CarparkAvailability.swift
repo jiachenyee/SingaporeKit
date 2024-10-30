@@ -21,13 +21,7 @@ public struct CarparkAvailability: Sendable, Decodable, SingaporeDataValue {
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        let timestampString = try container.decode(String.self, forKey: .timestamp)
-        
-        guard let timestamp = Date(iso8601Timestamp: timestampString) else {
-            throw DecodingError.dataCorruptedError(forKey: .timestamp, in: container, debugDescription: "Failed to decode timestamp")
-        }
-        
-        self.timestamp = timestamp
+        self.timestamp = try Date.decode(from: container, forKey: .timestamp)
         self.carparks = try container.decode([CarparkAvailability.Carpark].self, forKey: .carparks)
     }
 }

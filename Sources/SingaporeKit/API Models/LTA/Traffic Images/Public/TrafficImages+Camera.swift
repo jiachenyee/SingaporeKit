@@ -26,15 +26,7 @@ public extension TrafficImages {
         public init(from decoder: any Decoder) throws {
             let container: KeyedDecodingContainer<TrafficImages.Camera.CodingKeys> = try decoder.container(keyedBy: TrafficImages.Camera.CodingKeys.self)
             
-            let timestampString = try container.decode(String.self, forKey: CodingKeys.timestamp)
-            
-            guard let timestamp = Date(iso8601Timestamp: timestampString) else {
-                throw DecodingError.dataCorruptedError(forKey: .timestamp,
-                                                       in: container,
-                                                       debugDescription: "Failed to decode timestamp")
-            }
-            
-            self.timestamp = timestamp
+            self.timestamp = try Date.decode(from: container, forKey: .timestamp)
             self.image = try container.decode(URL.self, forKey: CodingKeys.image)
             self.location = try container.decode(Location.self, forKey: CodingKeys.location)
             self.cameraID = try container.decode(String.self, forKey: CodingKeys.cameraID)

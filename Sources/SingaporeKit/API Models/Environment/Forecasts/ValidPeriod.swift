@@ -20,17 +20,8 @@ public struct ValidPeriod: Decodable, CustomStringConvertible, Sendable {
     public init(from decoder: any Decoder) throws {
         let container: KeyedDecodingContainer<CodingKeys> = try decoder.container(keyedBy: CodingKeys.self)
         
-        let startTimestamp = try container.decode(String.self, forKey: .start)
-        let endTimestamp = try container.decode(String.self, forKey: .end)
-        
-        print(startTimestamp)
-        print(endTimestamp)
-        
-        guard let startTimestamp = Date(iso8601Timestamp: startTimestamp),
-              let endTimestamp = Date(iso8601Timestamp: endTimestamp) else {
-            throw DecodingError.dataCorrupted(.init(codingPath: [CodingKeys.start, CodingKeys.end],
-                                                    debugDescription: "Invalid ISO8601 date"))
-        }
+        let startTimestamp = try Date.decode(from: container, forKey: .start)
+        let endTimestamp = try Date.decode(from: container, forKey: .end)
         
         range = min(startTimestamp, endTimestamp)...min(endTimestamp, startTimestamp)
         

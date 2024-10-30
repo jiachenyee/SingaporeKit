@@ -38,35 +38,9 @@ public extension TwentyFourHourWeather {
         public init(from decoder: any Decoder) throws {
             let container: KeyedDecodingContainer<CodingKeys> = try decoder.container(keyedBy: CodingKeys.self)
             
-            let dateString = try container.decode(String.self, forKey: .date)
-            let fullDateString = dateString + "T00:00:00+08:00"
-            
-            guard let date = Date(iso8601Timestamp: fullDateString) else {
-                throw DecodingError.dataCorruptedError(forKey: .date,
-                                                       in: container,
-                                                       debugDescription: "Failed to decode updated timestamp")
-            }
-            
-            self.date = date
-            
-            let lastUpdatedDateString = try container.decode(String.self, forKey: .lastUpdated)
-            
-            guard let lastUpdated = Date(iso8601Timestamp: lastUpdatedDateString) else {
-                throw DecodingError.dataCorruptedError(forKey: .lastUpdated, in: container, debugDescription: "Failed to decode updated timestamp")
-            }
-            
-            self.lastUpdated = lastUpdated
-            
-            let timestamp = try container.decode(String.self, forKey: .timestamp)
-            
-            guard let timestampDate = Date(iso8601Timestamp: timestamp) else {
-                throw DecodingError.dataCorruptedError(forKey: .date,
-                                                       in: container,
-                                                       debugDescription: "Failed to decode updated timestamp")
-            }
-            
-            self.timestamp = timestampDate
-            
+            self.date = try Date.decode(from: container, forKey: .date)
+            self.lastUpdated = try Date.decode(from: container, forKey: .lastUpdated)
+            self.timestamp = try Date.decode(from: container, forKey: .timestamp)
             self.general = try container.decode(GeneralForecast.self, forKey: .general)
             self.detailedForecasts = try container.decode([Period].self, forKey: .detailedForecasts)
         }

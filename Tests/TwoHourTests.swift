@@ -9,7 +9,7 @@ import Foundation
 import Testing
 @testable import SingaporeKit
 
-@Suite("2h Weather Forecast")
+@Suite("2h Weather Forecast", .tags(.environment))
 struct TwoHourTests {
     @Test("2h Weather Valid Configurations", arguments: [
         nil,

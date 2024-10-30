@@ -1,5 +1,5 @@
 //
-//  RelativeHumidity+Reading.swift
+//  Reading.swift
 //  SingaporeKit
 //
 //  Created by Jia Chen Yee on 10/21/24.
@@ -16,16 +16,7 @@ public struct Reading: Codable, Identifiable, Hashable, Sendable {
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        let isoTimestamp = try container.decode(String.self, forKey: .timestamp)
-        let isoFormatter = ISO8601DateFormatter()
-        
-        guard let date = isoFormatter.date(from: isoTimestamp) else {
-            throw DecodingError.dataCorrupted(.init(codingPath: [CodingKeys.timestamp],
-                                                    debugDescription: "Invalid ISO8601 date"))
-        }
-        
-        self.timestamp = date
+        self.timestamp = try Date.decode(from: container, forKey: .timestamp)
         self.data = try container.decode([ReadingData].self, forKey: .data)
     }
 }
-
