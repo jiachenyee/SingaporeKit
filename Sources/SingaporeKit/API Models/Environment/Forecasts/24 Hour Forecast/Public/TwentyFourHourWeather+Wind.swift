@@ -7,26 +7,24 @@
 
 import Foundation
 
-public extension TwentyFourHourWeather {
-    struct Wind: Decodable, Sendable {
-        public let low: Double
-        public let high: Double
+public struct Wind: Decodable, Sendable {
+    public let low: Double
+    public let high: Double
+    
+    public let direction: WindDirection
+    
+    enum CodingKeys: CodingKey {
+        case speed
+        case direction
+    }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let speed = try container.decode(Speed.self, forKey: .speed)
         
-        public let direction: CompassPoint
+        high = speed.high
+        low = speed.low
         
-        enum CodingKeys: CodingKey {
-            case speed
-            case direction
-        }
-        
-        public init(from decoder: any Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            let speed = try container.decode(Speed.self, forKey: .speed)
-            
-            high = speed.high
-            low = speed.low
-            
-            self.direction = try container.decode(CompassPoint.self, forKey: .direction)
-        }
+        self.direction = try container.decode(WindDirection.self, forKey: .direction)
     }
 }

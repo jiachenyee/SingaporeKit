@@ -1,17 +1,17 @@
 //
-//  TwentyFourHourTests.swift
+//  FourDayForecastTests.swift
 //  SingaporeKit
 //
-//  Created by Jia Chen Yee on 10/21/24.
+//  Created by Jia Chen Yee on 10/30/24.
 //
 
 import Foundation
 import Testing
 @testable import SingaporeKit
 
-@Suite("24h Weather", .tags(.environment))
-struct TwentyFourHourTests {
-    @Test("24h Weather Valid Configurations", arguments: [
+@Suite("4 Day Weather", .tags(.environment))
+struct FourDayForecastTests {
+    @Test("4d Weather Valid Configurations", arguments: [
         nil,
         DateOption.now,
         DateOption.today,
@@ -25,17 +25,17 @@ struct TwentyFourHourTests {
             singapore.dateOption = dateOption
         }
         
-        await singapore.fetch24hWeather()
+        await singapore.fetch4dWeather()
         
-        switch await singapore.twentyFourHourWeather {
+        switch await singapore.fourDayForecast {
         case .loading, .none: #expect(Bool(false), "Fetching weather failed")
-        case .failure(let error): #expect(Bool(false), "Fetching weather failed with error: \(error)")
+        case .failure(let error): #expect(Bool(false), "Fetching weather failed with error: \(error.debugDescription)")
         case .success(let weather):
-            #expect(!weather.isEmpty)
+            #expect(!weather.forecasts.isEmpty)
         }
     }
     
-    @Test("24h Weather Invalid Configurations", arguments: [
+    @Test("4d Weather Invalid Configurations", arguments: [
         DateOption.day(.now.addingTimeInterval(86400)), // Tomorrow
         DateOption.moment(.now.addingTimeInterval(86400)), // Tomorrow Moment
         DateOption.day(.distantPast),
@@ -50,10 +50,10 @@ struct TwentyFourHourTests {
             singapore.dateOption = dateOption
         }
         
-        await singapore.fetch24hWeather()
+        await singapore.fetch4dWeather()
         
-        switch await singapore.twentyFourHourWeather {
-        case .loading, .none: #expect(Bool(false), "Fetching 24h weather failed")
+        switch await singapore.fourDayForecast {
+        case .loading, .none: #expect(Bool(false), "Fetching 4d weather failed")
         case .failure(let error):
             switch error {
             case .notFound: #expect(true)

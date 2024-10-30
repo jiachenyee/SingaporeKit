@@ -8,7 +8,7 @@
 import Foundation
 
 extension SingaporeData {
-    public enum Error: CustomStringConvertible {
+    public enum Error: CustomStringConvertible, CustomDebugStringConvertible {
         case notFound(String?)
         case apiError(String)
         case unexpectedServerResponse
@@ -32,6 +32,27 @@ extension SingaporeData {
                 "URL Error: \(error.localizedDescription)"
             case .decodingError(let error):
                 "Decoding Error: \(error.localizedDescription)"
+            case .unknown:
+                "Unknown Error"
+            }
+        }
+        
+        public var debugDescription: String {
+            switch self {
+            case .notFound(let string):
+                if let string {
+                    "Not Found: \(string)"
+                } else {
+                    "Not Found"
+                }
+            case .apiError(let string):
+                "API Error: \(string)"
+            case .unexpectedServerResponse:
+                "Unexpected server response"
+            case .urlError(let error):
+                "URL Error: \(error.localizedDescription)"
+            case .decodingError(let error):
+                "Decoding Error: \(error)"
             case .unknown:
                 "Unknown Error"
             }
