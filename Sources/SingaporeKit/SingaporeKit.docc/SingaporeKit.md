@@ -7,7 +7,19 @@ Access Singapore Government real-time APIs within your SwiftUI app.
 SingaporeKit is a framework that provides easy access to Singapore Government real-time APIs within your SwiftUI app.
 
 ## Topics
+### Environment Datasets
+- ``SingaporeData/airTemperature``
+- ``SingaporeData/psi``
+- ``SingaporeData/rainfall``
+- ``SingaporeData/relativeHumidity``
+- ``SingaporeData/uvIndex``
 
-### <!--@START_MENU_TOKEN@-->Group<!--@END_MENU_TOKEN@-->
+### Environment Forecasts
+- ``SingaporeData/twoHourWeather``
+- ``SingaporeData/twentyFourHourWeather``
+- ``SingaporeData/fourDayForecast``
 
-- <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
+### Transport Datasets
+- ``SingaporeData/availableTaxis``
+- ``SingaporeData/carparkAvailability``
+- ``SingaporeData/trafficImages``

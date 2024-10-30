@@ -28,8 +28,8 @@ struct PSITests {
         await singapore.fetchPSI()
         
         switch await singapore.psi {
-        case .loading, .none: #expect(Bool(false), "Fetching air temperature failed")
-        case .failure(let error): #expect(Bool(false), "Fetching air temperature failed with error: \(error)")
+        case .loading, .none: #expect(Bool(false), "Fetching PSI failed")
+        case .failure(let error): #expect(Bool(false), "Fetching PSI failed with error: \(error)")
         case .success(let at):
             #expect(!at.readings.isEmpty)
             #expect(!at.stations.isEmpty)
@@ -54,7 +54,7 @@ struct PSITests {
         await singapore.fetchPSI()
         
         switch await singapore.psi {
-        case .loading, .none: #expect(Bool(false), "Fetching air temperature failed")
+        case .loading, .none: #expect(Bool(false), "Fetching PSI failed")
         case .failure(let error):
             switch error {
             case .notFound: #expect(true)

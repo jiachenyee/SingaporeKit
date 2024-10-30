@@ -54,23 +54,6 @@ public class SingaporeData {
     ///     }
     /// }
     /// ```
-    ///
-    /// ## Topics
-    /// ### Environment Datasets
-    /// - ``airTemperature``
-    /// - ``psi``
-    /// - ``rainfall``
-    /// - ``uvIndex``
-    ///
-    /// ### Environment Forecasts
-    /// - ``twoHourWeather``
-    /// - ``twentyFourHourWeather``
-    /// - ``fourDayForecast``
-    ///
-    /// ### Transport Datasets
-    /// - ``availableTaxis``
-    /// - ``carparkAvailability``
-    /// - ``trafficImages``
     public var relativeHumidity: SingaporeDataResult<EnvironmentData> = .none
     
     /// Get air temperature readings from across Singapore.
@@ -117,24 +100,6 @@ public class SingaporeData {
     ///     }
     /// }
     /// ```
-    ///
-    /// ## Topics
-    /// ### Environment Datasets
-    /// - ``airTemperature``
-    /// - ``psi``
-    /// - ``rainfall``
-    /// - ``relativeHumidity``
-    /// - ``uvIndex``
-    ///
-    /// ### Environment Forecasts
-    /// - ``twoHourWeather``
-    /// - ``twentyFourHourWeather``
-    /// - ``fourDayForecast``
-    ///
-    /// ### Transport Datasets
-    /// - ``availableTaxis``
-    /// - ``carparkAvailability``
-    /// - ``trafficImages``
     public var airTemperature: SingaporeDataResult<EnvironmentData> = .none
     
     /// Get precipitation readings from across Singapore.
@@ -159,12 +124,12 @@ public class SingaporeData {
     /// Using the success parameter, you can access the data and display it in your SwiftUI view.
     ///
     /// ```swift
-    /// struct AirTemperatureView: View {
+    /// struct RainfallView: View {
     ///
-    ///     @Singapore(\.airTemperature) var airTemperature
+    ///     @Singapore(\.rainfall) var rainfall
     ///
     ///     var body: some View {
-    ///         switch airTemperature {
+    ///         switch rainfall {
     ///         case .none, .loading:
     ///             ProgressView()
     ///         case .failure(let error):
@@ -173,7 +138,7 @@ public class SingaporeData {
     ///             List(data.stations) { station in
     ///                 if let latestReading = data.latestReading(for: station) {
     ///                     LabeledContent(station.name) {
-    ///                         Text("\(String(format: "%.1f", latestReading))℃")
+    ///                         Text("\(String(format: "%.1f", latestReading))mm")
     ///                     }
     ///                 }
     ///             }
@@ -181,24 +146,6 @@ public class SingaporeData {
     ///     }
     /// }
     /// ```
-    ///
-    /// ## Topics
-    /// ### Environment Datasets
-    /// - ``airTemperature``
-    /// - ``psi``
-    /// - ``rainfall``
-    /// - ``relativeHumidity``
-    /// - ``uvIndex``
-    ///
-    /// ### Environment Forecasts
-    /// - ``twoHourWeather``
-    /// - ``twentyFourHourWeather``
-    /// - ``fourDayForecast``
-    ///
-    /// ### Transport Datasets
-    /// - ``availableTaxis``
-    /// - ``carparkAvailability``
-    /// - ``trafficImages``
     public var rainfall: SingaporeDataResult<EnvironmentData> = .none
     
     public var psi: SingaporeDataResult<EnvironmentData> = .none
