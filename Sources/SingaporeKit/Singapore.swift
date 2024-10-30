@@ -36,6 +36,10 @@ public struct Singapore<Value>: DynamicProperty where Value: SingaporeDataValue 
             singaporeData.dateOption = options
         }
         
+        if let options = options as? MomentOption {
+            singaporeData.momentOption = options
+        }
+        
         fetchData()
     }
     
@@ -51,6 +55,7 @@ public struct Singapore<Value>: DynamicProperty where Value: SingaporeDataValue 
             case \.uvIndex: await singaporeData.fetchUVIndex()
             case \.trafficImages: await singaporeData.fetchTrafficImages()
             case \.availableTaxis: await singaporeData.fetchAvailableTaxis()
+            case \.twoHourWeather: await singaporeData.fetch2hWeather()
             default: break
             }
         }

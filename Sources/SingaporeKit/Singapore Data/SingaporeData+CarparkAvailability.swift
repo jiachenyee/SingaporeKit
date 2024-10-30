@@ -19,7 +19,7 @@ extension SingaporeData {
             if let carparkAvailability = result.items.first {
                 self.carparkAvailability = .success(carparkAvailability)
             } else {
-                self.carparkAvailability = .failure(DataError.dataNotFound)
+                self.carparkAvailability = .failure(Error.dataNotFound)
             }
         } catch {
             carparkAvailability = .failure(error)

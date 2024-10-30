@@ -22,37 +22,6 @@ public extension TwentyFourHourWeather {
 }
 
 public extension TwentyFourHourWeather {
-    struct ValidPeriod: Decodable, CustomStringConvertible, Sendable {
-        public let range: ClosedRange<Date>
-        public let description: String
-        
-        public enum CodingKeys: String, CodingKey {
-            case start
-            case end
-            case description = "text"
-        }
-        
-        public init(from decoder: any Decoder) throws {
-            let container: KeyedDecodingContainer<TwentyFourHourWeather.ValidPeriod.CodingKeys> = try decoder.container(keyedBy: TwentyFourHourWeather.ValidPeriod.CodingKeys.self)
-            
-            let startTimestamp = try container.decode(String.self, forKey: .start)
-            let endTimestamp = try container.decode(String.self, forKey: .end)
-            
-            guard let startTimestamp = Date(iso8601Timestamp: startTimestamp),
-                  let endTimestamp = Date(iso8601Timestamp: endTimestamp),
-                  startTimestamp < endTimestamp else {
-                throw DecodingError.dataCorrupted(.init(codingPath: [CodingKeys.start, CodingKeys.end],
-                                                        debugDescription: "Invalid ISO8601 date"))
-            }
-            
-            range = startTimestamp...endTimestamp
-            
-            self.description = try container.decode(String.self, forKey: .description)
-        }
-    }
-}
-
-public extension TwentyFourHourWeather {
     struct Value: Decodable, Sendable {
         public let low: Double
         public let high: Double

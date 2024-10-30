@@ -1,42 +1,41 @@
 //
-//  RelativeHumidityTests.swift
+//  TwoHourTests.swift
 //  SingaporeKit
 //
-//  Created by Jia Chen Yee on 10/21/24.
+//  Created by Jia Chen Yee on 10/30/24.
 //
 
 import Foundation
 import Testing
 @testable import SingaporeKit
 
-@Suite("Relative Humidity", .tags(.environment))
-struct RelativeHumidityTests {
-    @Test("Relative Humidity Valid Configurations", arguments: [
+@Suite("2h Weather Forecast")
+struct TwoHourTests {
+    @Test("2h Weather Valid Configurations", arguments: [
         nil,
         DateOption.now,
         DateOption.today,
         DateOption.day(.now.addingTimeInterval(-86400)), // Yesterday
         DateOption.moment(.now.addingTimeInterval(-86400)) // Yesterday Moment
     ])
-    func relativeHumidityValid(dateOption: DateOption?) async throws {
+    func twoHourValid(dateOption: DateOption?) async throws {
         let singapore = await SingaporeData()
         
         await MainActor.run {
             singapore.dateOption = dateOption
         }
         
-        await singapore.fetchRelativeHumidity()
+        await singapore.fetch2hWeather()
         
-        switch await singapore.relativeHumidity {
-        case .loading, .none: #expect(Bool(false), "Fetching relative humidity failed")
-        case .failure(let error): #expect(Bool(false), "Fetching relative humidity failed with error: \(error)")
-        case .success(let rh):
-            #expect(!rh.readings.isEmpty)
-            #expect(!rh.stations.isEmpty)
+        switch await singapore.twoHourWeather {
+        case .loading, .none: #expect(Bool(false), "Fetching 2h weather failed")
+        case .failure(let error): #expect(Bool(false), "Fetching 2h weather failed with error: \(error)")
+        case .success(let weather):
+            #expect(!weather.isEmpty)
         }
     }
     
-    @Test("Relative Humidity Invalid Configurations", arguments: [
+    @Test("2h Weather Invalid Configurations", arguments: [
         DateOption.day(.now.addingTimeInterval(86400)), // Tomorrow
         DateOption.moment(.now.addingTimeInterval(86400)), // Tomorrow Moment
         DateOption.day(.distantPast),
@@ -44,19 +43,23 @@ struct RelativeHumidityTests {
         DateOption.day(.distantFuture),
         DateOption.moment(.distantFuture)
     ])
-    func relativeHumidityInvalid(dateOption: DateOption?) async throws {
+    func twoHourInvalid(dateOption: DateOption?) async throws {
         let singapore = await SingaporeData()
         
         await MainActor.run {
             singapore.dateOption = dateOption
         }
         
-        await singapore.fetchRelativeHumidity()
+        await singapore.fetch2hWeather()
         
-        switch await singapore.relativeHumidity {
-        case .loading, .none: #expect(Bool(false), "Fetching relative humidity failed")
+        switch await singapore.twoHourWeather {
+        case .loading, .none: #expect(Bool(false), "Fetching 2h weather failed")
         case .failure(let error):
-            print(error)
+            let error = try #require(error as? SingaporeData.Error)
+            switch error {
+            case .notFound: #expect(true)
+            default: #expect(Bool(false), "Unexpected error: \(error)")
+            }
             #expect(true)
         case .success: #expect(Bool(false), "Expected to receive no result")
         }

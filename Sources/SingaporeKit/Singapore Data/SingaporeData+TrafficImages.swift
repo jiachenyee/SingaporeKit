@@ -19,7 +19,7 @@ extension SingaporeData {
             if let trafficImages = result.items.first {
                 self.trafficImages = .success(trafficImages)
             } else {
-                self.trafficImages = .failure(DataError.dataNotFound)
+                self.trafficImages = .failure(Error.dataNotFound)
             }
         } catch {
             trafficImages = .failure(error)
