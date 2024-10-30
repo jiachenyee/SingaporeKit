@@ -12,16 +12,6 @@ public struct TwentyFourHourWeather {
 }
 
 public extension TwentyFourHourWeather {
-    struct GeneralForecast: Decodable, Sendable {
-        public let validPeriod: ValidPeriod
-        public let temperature: Value
-        public let relativeHumidity: Value
-        public let forecast: Forecast
-        public let wind: Wind
-    }
-}
-
-public extension TwentyFourHourWeather {
     struct Value: Decodable, Sendable {
         public let low: Double
         public let high: Double

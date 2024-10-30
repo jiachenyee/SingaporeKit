@@ -36,7 +36,7 @@ public extension TwentyFourHourWeather {
         }
         
         public init(from decoder: any Decoder) throws {
-            let container: KeyedDecodingContainer<TwentyFourHourWeather.Record.CodingKeys> = try decoder.container(keyedBy: TwentyFourHourWeather.Record.CodingKeys.self)
+            let container: KeyedDecodingContainer<CodingKeys> = try decoder.container(keyedBy: CodingKeys.self)
             
             let dateString = try container.decode(String.self, forKey: .date)
             let fullDateString = dateString + "T00:00:00+08:00"
