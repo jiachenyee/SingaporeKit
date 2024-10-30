@@ -22,7 +22,7 @@ extension SingaporeData {
         }
     }
     
-    fileprivate func sendAvailableTaxisRequest(date: String) async throws -> AvailableTaxis {
+    fileprivate func sendAvailableTaxisRequest(date: String) async throws(Error) -> AvailableTaxis {
         var url = URL(string: "https://api.data.gov.sg/v1/transport/taxi-availability")!
         
         let queryItems: [URLQueryItem] = [
@@ -31,13 +31,17 @@ extension SingaporeData {
         
         url.append(queryItems: queryItems)
         
-        let (data, status) = try await URLSession.shared.data(from: url)
-        
-        guard let status = status as? HTTPURLResponse else { throw URLError(.badServerResponse) }
-        
-        let receivedResponse = try JSONDecoder().decode(AvailableTaxis.self,
-                                                        from: data)
-        
-        return receivedResponse
+        do {
+            let (data, status) = try await URLSession.shared.data(from: url)
+            
+            guard let status = status as? HTTPURLResponse else { throw Error.unexpectedServerResponse }
+            
+            let receivedResponse = try JSONDecoder().decode(AvailableTaxis.self,
+                                                            from: data)
+            
+            return receivedResponse
+        } catch {
+            throw Error.from(error)
+        }
     }
 }

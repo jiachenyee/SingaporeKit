@@ -9,18 +9,44 @@ import Foundation
 
 extension SingaporeData {
     public enum Error: CustomStringConvertible {
-        case dataNotFound
-        case notFound(String)
+        case notFound(String?)
         case apiError(String)
+        case unexpectedServerResponse
+        case urlError(URLError)
+        case decodingError(DecodingError)
+        case unknown
         
         public var description: String {
             switch self {
-            case .dataNotFound:
-                "Data not found"
             case .notFound(let string):
-                "Not Found: \(string)"
+                if let string {
+                    "Not Found: \(string)"
+                } else {
+                    "Not Found"
+                }
             case .apiError(let string):
                 "API Error: \(string)"
+            case .unexpectedServerResponse:
+                "Unexpected server response"
+            case .urlError(let error):
+                "URL Error: \(error.localizedDescription)"
+            case .decodingError(let error):
+                "Decoding Error: \(error.localizedDescription)"
+            case .unknown:
+                "Unknown Error"
+            }
+        }
+        
+        static func from(_ error: Swift.Error) -> SingaporeData.Error {
+            switch error {
+            case let error as Error:
+                return error
+            case let error as URLError:
+                return .urlError(error)
+            case let error as DecodingError:
+                return .decodingError(error)
+            default:
+                return .unknown
             }
         }
     }

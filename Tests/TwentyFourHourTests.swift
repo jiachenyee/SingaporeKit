@@ -55,7 +55,10 @@ struct TwentyFourHourTests {
         switch await singapore.twentyFourHourWeather {
         case .loading, .none: #expect(Bool(false), "Fetching 24h weather failed")
         case .failure(let error):
-            print(error)
+            switch error {
+            case .notFound: #expect(true)
+            default: #expect(Bool(false), "Unexpected error: \(error)")
+            }
             #expect(true)
         case .success: #expect(Bool(false), "Expected to receive no result")
         }

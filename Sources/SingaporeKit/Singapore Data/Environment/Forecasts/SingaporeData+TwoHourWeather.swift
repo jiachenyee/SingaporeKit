@@ -38,7 +38,7 @@ extension SingaporeData {
         if let weatherResult, !weatherResult.forecasts.isEmpty {
             twoHourWeather = .success(weatherResult.forecasts)
         } else {
-            twoHourWeather = .failure(Error.dataNotFound)
+            twoHourWeather = .failure(Error.notFound(nil))
         }
     }
 }

@@ -13,5 +13,5 @@ public enum SingaporeDataResult<Value: SingaporeDataValue & Sendable>: Singapore
     case none
     case loading
     case success(Value)
-    case failure(Error)
+    case failure(SingaporeData.Error)
 }

@@ -50,8 +50,11 @@ struct TrafficImagesTests {
         switch await singapore.trafficImages {
         case .loading, .none: #expect(Bool(false), "Fetching traffic images failed")
         case .failure(let error):
-            print(error.localizedDescription)
-            #expect(Bool(true))
+            switch error {
+            case .apiError: #expect(true)
+            default: #expect(Bool(false), "Unexpected error: \(error)")
+            }
+            #expect(true)
         case .success: #expect(Bool(false), "Expected to receive no result")
         }
     }

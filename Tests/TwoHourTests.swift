@@ -55,7 +55,6 @@ struct TwoHourTests {
         switch await singapore.twoHourWeather {
         case .loading, .none: #expect(Bool(false), "Fetching 2h weather failed")
         case .failure(let error):
-            let error = try #require(error as? SingaporeData.Error)
             switch error {
             case .notFound: #expect(true)
             default: #expect(Bool(false), "Unexpected error: \(error)")

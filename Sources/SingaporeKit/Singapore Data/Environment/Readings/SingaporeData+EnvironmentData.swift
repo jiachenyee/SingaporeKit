@@ -29,13 +29,13 @@ extension SingaporeData {
                 token = currentPageResult.paginationToken
             } while token != nil
         } catch {
-            return .failure(error)
+            return .failure(Error.from(error))
         }
         
         if let value = result?.toEnvironmentData() {
             return .success(value)
         } else {
-            return .failure(Error.dataNotFound)
+            return .failure(Error.notFound(nil))
         }
     }
     

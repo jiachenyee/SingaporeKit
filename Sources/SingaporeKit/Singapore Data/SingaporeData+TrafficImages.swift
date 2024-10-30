@@ -19,14 +19,14 @@ extension SingaporeData {
             if let trafficImages = result.items.first {
                 self.trafficImages = .success(trafficImages)
             } else {
-                self.trafficImages = .failure(Error.dataNotFound)
+                self.trafficImages = .failure(Error.notFound(nil))
             }
         } catch {
             trafficImages = .failure(error)
         }
     }
     
-    fileprivate func sendTrafficImaegsRequest(date: String) async throws -> TrafficImages.RetrievedData {
+    fileprivate func sendTrafficImaegsRequest(date: String) async throws(Error) -> TrafficImages.RetrievedData {
         var url = URL(string: "https://api.data.gov.sg/v1/transport/traffic-images")!
         
         let queryItems: [URLQueryItem] = [
@@ -35,13 +35,28 @@ extension SingaporeData {
         
         url.append(queryItems: queryItems)
         
-        let (data, status) = try await URLSession.shared.data(from: url)
-        
-        guard let status = status as? HTTPURLResponse else { throw URLError(.badServerResponse) }
-        
-        let receivedResponse = try JSONDecoder().decode(TrafficImages.RetrievedData.self,
-                                                        from: data)
-        
-        return receivedResponse
+        do {
+            let (data, status) = try await URLSession.shared.data(from: url)
+            
+            guard let status = status as? HTTPURLResponse else { throw Error.unexpectedServerResponse }
+            
+            if status.statusCode == 200 {
+                let receivedResponse = try JSONDecoder().decode(TrafficImages.RetrievedData.self,
+                                                                from: data)
+                
+                return receivedResponse
+            } else {
+                let error = try JSONDecoder().decode(TrafficImages.ErrorResponse.self,
+                                                     from: data)
+                
+                if status.statusCode == 404 {
+                    throw Error.notFound(error.message)
+                } else {
+                    throw Error.apiError(error.message)
+                }
+            }
+        } catch {
+            throw Error.from(error)
+        }
     }
 }

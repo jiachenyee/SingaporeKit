@@ -34,7 +34,7 @@ extension SingaporeData {
         if !weatherResult.isEmpty {
             twentyFourHourWeather = .success(weatherResult)
         } else {
-            twentyFourHourWeather = .failure(Error.dataNotFound)
+            twentyFourHourWeather = .failure(Error.notFound(nil))
         }
     }
 }
