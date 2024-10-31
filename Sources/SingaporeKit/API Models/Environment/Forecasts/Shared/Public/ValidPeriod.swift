@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ValidPeriod: Decodable, CustomStringConvertible, Sendable {
+public struct ValidPeriod: Decodable, CustomStringConvertible, Sendable, Hashable {
     public let range: ClosedRange<Date>
     public let description: String
     

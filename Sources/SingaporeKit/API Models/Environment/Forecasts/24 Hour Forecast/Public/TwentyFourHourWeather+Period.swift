@@ -8,7 +8,7 @@
 import Foundation
 
 public extension TwentyFourHourWeather {
-    struct Period: Decodable, Sendable {
+    struct Period: Decodable, Sendable, Identifiable {
         public let timePeriod: ValidPeriod
         
         public let west: Weather
@@ -20,6 +20,10 @@ public extension TwentyFourHourWeather {
         enum CodingKeys: CodingKey {
             case timePeriod
             case regions
+        }
+        
+        public var id: ValidPeriod {
+            timePeriod
         }
         
         public init(from decoder: any Decoder) throws {
