@@ -23,9 +23,7 @@ public extension TwoHourForecast {
 }
 
 extension Array where Element == TwoHourForecast.Forecasts {
-    public var current: Element {
-        return first {
-            Calendar.singapore.isDateInToday($0.timestamp)
-        }!
+    public var latest: Element {
+        self.max { $0.timestamp < $1.timestamp }!
     }
 }
