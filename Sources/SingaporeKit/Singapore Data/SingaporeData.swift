@@ -148,7 +148,7 @@ public class SingaporeData {
     /// ```
     public var rainfall: SingaporeDataResult<EnvironmentData> = .none
     
-    public var psi: SingaporeDataResult<EnvironmentData> = .none
+    public var airQuality: SingaporeDataResult<AirQuality.RetrievedData> = .none
     
     public var uvIndex: SingaporeDataResult<EnvironmentData> = .none
     

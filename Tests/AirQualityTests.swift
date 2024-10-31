@@ -9,9 +9,9 @@ import Foundation
 import Testing
 @testable import SingaporeKit
 
-@Suite("PSI", .tags(.environment))
-struct PSITests {
-    @Test("PSI Valid Configurations", arguments: [
+@Suite("Air Quality", .tags(.environment))
+struct AirQualityTests {
+    @Test("Air Quality Valid Configurations", arguments: [
         nil,
         DateOption.now,
         DateOption.today,
@@ -25,18 +25,17 @@ struct PSITests {
             singapore.dateOption = dateOption
         }
         
-        await singapore.fetchPSI()
+        await singapore.fetchAirQuality()
         
-        switch await singapore.psi {
+        switch await singapore.airQuality {
         case .loading, .none: #expect(Bool(false), "Fetching PSI failed")
         case .failure(let error): #expect(Bool(false), "Fetching PSI failed with error: \(error)")
-        case .success(let at):
-            #expect(!at.readings.isEmpty)
-            #expect(!at.stations.isEmpty)
+        case .success(let aq):
+            #expect(!aq.measurements.isEmpty)
         }
     }
     
-    @Test("PSI Invalid Configurations", arguments: [
+    @Test("Air Quality Configurations", arguments: [
         DateOption.day(.now.addingTimeInterval(86400)), // Tomorrow
         DateOption.moment(.now.addingTimeInterval(86400)), // Tomorrow Moment
         DateOption.day(.distantPast),
@@ -51,9 +50,9 @@ struct PSITests {
             singapore.dateOption = dateOption
         }
         
-        await singapore.fetchPSI()
+        await singapore.fetchAirQuality()
         
-        switch await singapore.psi {
+        switch await singapore.airQuality {
         case .loading, .none: #expect(Bool(false), "Fetching PSI failed")
         case .failure(let error):
             switch error {

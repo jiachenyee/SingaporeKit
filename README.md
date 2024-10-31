@@ -2,7 +2,7 @@
 SingaporeKit makes it easy to use Singapore government data within your SwiftUI projects. Using the `@Singapore` property wrapper, you can retrieve real-time government data from [data.gov.sg](https://data.gov.sg/datasets?formats=API).
 
 > [!CAUTION]
-> PSI and UV Index data is currently broken.
+> UV Index data is currently broken.
 
 ## using `@Singapore`
 Use the `@Singapore` property wrapper to retrieve any [data.gov.sg real-time API](https://data.gov.sg/datasets?formats=API) value.
@@ -12,7 +12,7 @@ Use the `@Singapore` property wrapper to retrieve any [data.gov.sg real-time API
 @Singapore(\.twentyFourHourWeather) var twentyFourHourWeather
 @Singapore(\.airTemperature) var airTemperature
 @Singapore(\.rainfall) var rainfall
-@Singapore(\.psi) var psi
+@Singapore(\.airQuality) var airQuality
 @Singapore(\.uvIndex) var uvIndex
 @Singapore(\.twoHourWeather) var twoHourWeather
 @Singapore(\.fourDayForecast) var fourDayForecast
