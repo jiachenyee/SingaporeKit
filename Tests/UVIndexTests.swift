@@ -30,9 +30,8 @@ struct UVIndexTests {
         switch await singapore.uvIndex {
         case .loading, .none: #expect(Bool(false), "Fetching UV index failed")
         case .failure(let error): #expect(Bool(false), "Fetching UV index failed with error: \(error)")
-        case .success(let at):
-            #expect(!at.readings.isEmpty)
-            #expect(!at.stations.isEmpty)
+        case .success(let uvi):
+            #expect(!uvi.records.isEmpty)
         }
     }
     

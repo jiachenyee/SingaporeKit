@@ -150,7 +150,7 @@ public class SingaporeData {
     
     public var airQuality: SingaporeDataResult<AirQuality.RetrievedData> = .none
     
-    public var uvIndex: SingaporeDataResult<EnvironmentData> = .none
+    public var uvIndex: SingaporeDataResult<UVIndex> = .none
     
     public var twentyFourHourWeather: SingaporeDataResult<[TwentyFourHourWeather.Record]> = .none
     
