@@ -7,12 +7,12 @@
 
 import Foundation
 
-extension AirQuality {
+public extension AirQuality {
     struct Reading: Decodable, Sendable {
-        let north: Int
-        let south: Int
-        let east: Int
-        let west: Int
-        let central: Int
+        public let north: Int
+        public let south: Int
+        public let east: Int
+        public let west: Int
+        public let central: Int
     }
 }

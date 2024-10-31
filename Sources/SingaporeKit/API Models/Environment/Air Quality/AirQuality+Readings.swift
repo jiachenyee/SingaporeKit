@@ -9,24 +9,24 @@ import Foundation
 
 public extension AirQuality {
     struct Readings: Decodable, Sendable {
-        let o3SubIndex: Reading
-        let o3EightHourMax: Reading
+        public let o3SubIndex: Reading
+        public let o3EightHourMax: Reading
         
-        let pm10TwentyFourHourly: Reading
-        let pm10SubIndex: Reading
+        public let pm10TwentyFourHourly: Reading
+        public let pm10SubIndex: Reading
         
-        let no2OneHourMax: Reading
+        public let no2OneHourMax: Reading
         
-        let psiTwentyFourHourly: Reading
+        public let psiTwentyFourHourly: Reading
         
-        let pm25TwentyFourHourly: Reading
-        let pm25SubIndex: Reading
+        public let pm25TwentyFourHourly: Reading
+        public let pm25SubIndex: Reading
         
-        let so2SubIndex: Reading
-        let so2TwentyFourHourly: Reading
+        public let so2SubIndex: Reading
+        public let so2TwentyFourHourly: Reading
         
-        let coEightHourMax: Reading
-        let coSubIndex: Reading
+        public let coEightHourMax: Reading
+        public let coSubIndex: Reading
         
         enum CodingKeys: String, CodingKey {
             case o3SubIndex = "o3_sub_index"

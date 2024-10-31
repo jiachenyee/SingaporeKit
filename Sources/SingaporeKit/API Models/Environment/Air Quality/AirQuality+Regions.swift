@@ -9,11 +9,11 @@ import Foundation
 
 public extension AirQuality {
     struct Regions: Sendable {
-        var north: Location
-        var south: Location
-        var east: Location
-        var west: Location
-        var central: Location
+        public let north: Location
+        public let south: Location
+        public let east: Location
+        public let west: Location
+        public let central: Location
         
         init?(from metadata: [RegionMetadata]) {
             var north: Location?
