@@ -7,13 +7,17 @@
 
 import Foundation
 
-public struct AirQuality: Decodable, Sendable {
+public struct AirQuality: Decodable, Sendable, Identifiable {
     public let date: String
     
     public let lastUpdated: Date
     public let timestamp: Date
     
     public let readings: Readings
+    
+    public var id: Date {
+        timestamp
+    }
     
     enum CodingKeys: String, CodingKey {
         case date

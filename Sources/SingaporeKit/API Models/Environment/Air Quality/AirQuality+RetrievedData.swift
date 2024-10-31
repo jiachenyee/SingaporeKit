@@ -36,5 +36,9 @@ public extension AirQuality {
             
             self.paginationToken = try container.decodeIfPresent(String.self, forKey: .paginationToken)
         }
+        
+        public var latestMeasurement: AirQuality {
+            measurements.max(by: { $0.timestamp < $1.timestamp })!
+        }
     }
 }
