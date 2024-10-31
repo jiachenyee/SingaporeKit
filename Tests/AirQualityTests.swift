@@ -1,5 +1,5 @@
 //
-//  PSITests.swift
+//  AirQualityTests.swift
 //  SingaporeKit
 //
 //  Created by Jia Chen Yee on 10/29/24.
@@ -18,7 +18,7 @@ struct AirQualityTests {
         DateOption.day(.now.addingTimeInterval(-86400)), // Yesterday
         DateOption.moment(.now.addingTimeInterval(-86400)) // Yesterday Moment
     ])
-    func psiValid(dateOption: DateOption?) async throws {
+    func aqValid(dateOption: DateOption?) async throws {
         let singapore = await SingaporeData()
         
         await MainActor.run {
@@ -28,8 +28,8 @@ struct AirQualityTests {
         await singapore.fetchAirQuality()
         
         switch await singapore.airQuality {
-        case .loading, .none: #expect(Bool(false), "Fetching PSI failed")
-        case .failure(let error): #expect(Bool(false), "Fetching PSI failed with error: \(error)")
+        case .loading, .none: #expect(Bool(false), "Fetching Air Quality failed")
+        case .failure(let error): #expect(Bool(false), "Fetching Air Quality failed with error: \(error)")
         case .success(let aq):
             #expect(!aq.measurements.isEmpty)
         }
@@ -43,7 +43,7 @@ struct AirQualityTests {
         DateOption.day(.distantFuture),
         DateOption.moment(.distantFuture)
     ])
-    func psiInvalid(dateOption: DateOption?) async throws {
+    func aqInvalid(dateOption: DateOption?) async throws {
         let singapore = await SingaporeData()
         
         await MainActor.run {
@@ -53,7 +53,7 @@ struct AirQualityTests {
         await singapore.fetchAirQuality()
         
         switch await singapore.airQuality {
-        case .loading, .none: #expect(Bool(false), "Fetching PSI failed")
+        case .loading, .none: #expect(Bool(false), "Fetching Air Quality failed")
         case .failure(let error):
             switch error {
             case .notFound: #expect(true)

@@ -8,8 +8,8 @@ SingaporeKit is a framework that provides easy access to Singapore Government re
 
 ## Topics
 ### Environment Datasets
+- ``SingaporeData/airQuality``
 - ``SingaporeData/airTemperature``
-- ``SingaporeData/psi``
 - ``SingaporeData/rainfall``
 - ``SingaporeData/relativeHumidity``
 - ``SingaporeData/uvIndex``
