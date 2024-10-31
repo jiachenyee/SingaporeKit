@@ -8,7 +8,9 @@
 import Foundation
 
 public extension TwoHourForecast {
-    struct ForecastLocation: Sendable {
+    struct ForecastLocation: Sendable, Identifiable {
+        public var id: String { area }
+        
         public let area: String
         public let forecast: Weather
         public let location: Location?

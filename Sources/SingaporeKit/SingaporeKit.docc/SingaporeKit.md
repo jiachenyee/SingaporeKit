@@ -14,7 +14,7 @@ SingaporeKit is a framework that provides easy access to Singapore Government re
 - ``SingaporeData/relativeHumidity``
 - ``SingaporeData/uvIndex``
 
-### Environment Forecasts
+### Weather Forecasts
 - ``SingaporeData/twoHourWeather``
 - ``SingaporeData/twentyFourHourWeather``
 - ``SingaporeData/fourDayForecast``
