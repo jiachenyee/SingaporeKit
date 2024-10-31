@@ -9,7 +9,11 @@ import Foundation
 
 extension SingaporeData {
     func fetchRelativeHumidity() async {
-        relativeHumidity = .loading
-        relativeHumidity = await fetchEnvironmentData(dataset: "relative-humidity")
+        await performRequest(for: dateOption,
+                             refreshDuration: 60 * 5) {
+            return await fetchEnvironmentData(dataset: "relative-humidity")
+        } set: {
+            relativeHumidity = $0
+        }
     }
 }

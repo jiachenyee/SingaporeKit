@@ -9,7 +9,11 @@ import Foundation
 
 extension SingaporeData {
     func fetchRainfall() async {
-        rainfall = .loading
-        rainfall = await fetchEnvironmentData(dataset: "rainfall")
+        await performRequest(for: dateOption,
+                             refreshDuration: 60 * 5) {
+            return await fetchEnvironmentData(dataset: "rainfall")
+        } set: {
+            rainfall = $0
+        }
     }
 }

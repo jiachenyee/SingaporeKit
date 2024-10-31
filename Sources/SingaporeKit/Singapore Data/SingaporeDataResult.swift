@@ -14,4 +14,11 @@ public enum SingaporeDataResult<Value: SingaporeDataValue & Sendable>: Singapore
     case loading
     case success(Value)
     case failure(SingaporeData.Error)
+    
+    var isSuccess: Bool {
+        switch self {
+        case .success: return true
+        default: return false
+        }
+    }
 }
