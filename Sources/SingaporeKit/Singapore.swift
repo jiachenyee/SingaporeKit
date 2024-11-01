@@ -29,15 +29,16 @@ public struct Singapore<Value>: DynamicProperty where Value: SingaporeDataValue 
     }
     
     public init(_ keyPath: KeyPath<SingaporeData, Value>,
-                options: Value.DataOption) {
+                option: Value.DataOption) {
         self.keyPath = keyPath
         
-        if let options = options as? DateOption {
-            singaporeData.dateOption = options
-        }
-        
-        if let options = options as? MomentOption {
-            singaporeData.momentOption = options
+        switch option {
+        case let dateOption as DateOption:
+            singaporeData.dateOption = dateOption
+        case let momentOption as MomentOption:
+            singaporeData.momentOption = momentOption
+        default:
+            break
         }
         
         fetchData()
