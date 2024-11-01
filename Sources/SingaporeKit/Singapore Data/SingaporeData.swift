@@ -301,6 +301,44 @@ public class SingaporeData {
     
     public var twentyFourHourWeather: SingaporeDataResult<[TwentyFourHourWeather.Record]> = .none
     
+    /// Retrieve the two-hour weather forecast for Singapore.
+    ///
+    /// For more information, visit the [data.gov.sg](https://data.gov.sg/datasets?formats=API).
+    ///
+    /// ## Usage
+    /// Use the `@Singapore` property wrapper to access the air temperature data.
+    ///
+    /// You can use a Switch statement to handle the different states of the data:
+    /// - `.none`: The data has not been loaded yet.
+    /// - `.loading`: The data is currently being loaded.
+    /// - `.failure`: The data failed to load.
+    /// - `.success`: The data has been successfully loaded.
+    ///
+    /// Using the success parameter, you can access the data and display it in your SwiftUI view.
+    ///
+    /// ```swift
+    /// struct TwoHourForecastView: View {
+    ///
+    ///     @Singapore(\.twoHourWeather) var twoHourWeather
+    ///
+    ///     var body: some View {
+    ///         switch twoHourWeather {
+    ///         case .none, .loading:
+    ///             ProgressView()
+    ///         case .failure(let error):
+    ///             Text("Failed to Load: \(error.localizedDescription)")
+    ///         case .success(let data):
+    ///             let data = data.latest
+    ///
+    ///             List(data.locations) { location in
+    ///                 Section(location.area) {
+    ///                     Label(location.forecast.description, systemImage: location.forecast.systemImage)
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
     public var twoHourWeather: SingaporeDataResult<[TwoHourForecast.Forecasts]> = .none
     
     public var fourDayForecast: SingaporeDataResult<FourDayForecast> = .none

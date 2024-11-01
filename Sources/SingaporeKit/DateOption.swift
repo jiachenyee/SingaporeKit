@@ -17,12 +17,17 @@ public enum DateOption: SingaporeDataOption, Sendable {
     case moment(Date)
     case day(Date)
     
+    /// Supply a refresh time interval in seconds
+    ///
+    /// By default, the refresh interval is based on the suggested refresh interval from the API
+    case realTime(TimeInterval? = nil)
+    
     func date() -> String {
         let targetDate: Date
         var withTime: Bool
         
         switch self {
-        case .now:
+        case .now, .realTime:
             targetDate = .now
             withTime = true
         case .today:
