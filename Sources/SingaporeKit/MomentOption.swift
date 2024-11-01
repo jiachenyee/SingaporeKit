@@ -15,11 +15,13 @@ public enum MomentOption: SingaporeDataOption, Sendable {
     case now
     case at(Date)
     
+    case realTime(TimeInterval? = nil)
+    
     func date() -> String {
         let targetDate: Date
         
         switch self {
-        case .now: targetDate = .now
+        case .now, .realTime: targetDate = .now
         case .at(let date):
             targetDate = date
         }

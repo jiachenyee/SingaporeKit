@@ -9,20 +9,26 @@ import Foundation
 
 extension SingaporeData {
     func fetchTrafficImages() async {
-        trafficImages = .loading
-        
+        await performRequest(for: momentOption, refreshDuration: 60) {
+            await sendTrafficImagesRequest()
+        } set: {
+            trafficImages = $0
+        }
+    }
+    
+    func sendTrafficImagesRequest() async -> SingaporeDataResult<TrafficImages> {
         let date = (momentOption ?? .now).date()
         
         do {
             let result: TrafficImages.RetrievedData = try await sendGenericRequest(date: date, endpoint: "traffic-images")
             
             if let trafficImages = result.items.first {
-                self.trafficImages = .success(trafficImages)
+                return .success(trafficImages)
             } else {
-                self.trafficImages = .failure(Error.notFound(nil))
+                return .failure(Error.notFound(nil))
             }
         } catch {
-            trafficImages = .failure(error)
+            return .failure(error)
         }
     }
 }

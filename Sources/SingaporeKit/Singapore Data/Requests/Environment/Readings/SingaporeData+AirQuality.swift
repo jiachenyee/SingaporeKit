@@ -9,8 +9,16 @@ import Foundation
 
 extension SingaporeData {
     func fetchAirQuality() async {
-        airQuality = .loading
-        
+        // AQ is updated hourly
+        await performRequest(for: dateOption,
+                             refreshDuration: 60*60) {
+            return await sendAirQualityRequest()
+        } set: {
+            airQuality = $0
+        }
+    }
+    
+    func sendAirQualityRequest() async -> SingaporeDataResult<AirQuality.RetrievedData> {
         let date = (dateOption ?? .now).date()
         
         var token: String?
@@ -31,14 +39,13 @@ extension SingaporeData {
                 token = result.paginationToken
             } while token != nil
         } catch {
-            airQuality = .failure(error)
-            return
+            return .failure(error)
         }
         
         if let aqResult, !aqResult.measurements.isEmpty {
-            airQuality = .success(aqResult)
+            return .success(aqResult)
         } else {
-            airQuality = .failure(Error.notFound(nil))
+            return .failure(Error.notFound(nil))
         }
     }
 }
