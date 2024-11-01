@@ -66,7 +66,3 @@ struct RelativeHumidityView: View {
     }
 }
 ```
-
-## roadmap
-- [ ] docc documentation
-- [ ] sample projects
