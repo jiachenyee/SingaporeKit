@@ -8,7 +8,9 @@
 import Foundation
 
 public extension FourDayForecast {
-    struct Forecast: Decodable, Sendable {
+    struct Forecast: Decodable, Sendable, Identifiable {
+        public var id: Date { date }
+        
         public let temperature: Value
         public let relativeHumidity: Value
         public let weather: WeatherForecast

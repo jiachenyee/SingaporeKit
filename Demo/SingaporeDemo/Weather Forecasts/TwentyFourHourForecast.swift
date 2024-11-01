@@ -1,5 +1,5 @@
 //
-//  TwentyFourHourForecast.swift
+//  TwentyFourHourForecastView.swift
 //  SingaporeDemo
 //
 //  Created by Jia Chen Yee on 10/31/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import SingaporeKit
 
-struct TwentyFourHourForecast: View {
+struct TwentyFourHourForecastView: View {
     
     @Singapore(\.twentyFourHourWeather) var twentyFourHourWeather
     
@@ -86,5 +86,5 @@ struct TwentyFourHourForecast: View {
 }
 
 #Preview {
-    TwentyFourHourForecast()
+    TwentyFourHourForecastView()
 }

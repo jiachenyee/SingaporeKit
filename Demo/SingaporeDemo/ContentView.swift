@@ -57,10 +57,17 @@ struct ContentView: View {
                     }
                     
                     NavigationLink {
-                        TwentyFourHourForecast()
+                        TwentyFourHourForecastView()
                             .navigationTitle("24 Hour Forecast")
                     } label: {
                         Label(("24 Hour Forecast"), systemImage: "cloud.sun")
+                    }
+                    
+                    NavigationLink {
+                        FourDayForecastView()
+                            .navigationTitle("4 Day Forecast")
+                    } label: {
+                        Label(("24 Hour Forecast"), systemImage: "calendar")
                     }
                 }
                 
