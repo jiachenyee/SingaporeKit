@@ -10,7 +10,7 @@ import SingaporeKit
 
 struct AirTemperatureView: View {
     
-    @Singapore(\.airTemperature, options: .realTime()) var airTemperature
+    @Singapore(\.airTemperature, option: .realTime()) var airTemperature
     
     var body: some View {
         switch airTemperature {
