@@ -54,6 +54,8 @@ public class SingaporeData {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Screenshot of a demo app](rh.png)
     public var relativeHumidity: SingaporeDataResult<EnvironmentData> = .none
     
     /// Get air temperature readings from across Singapore.
@@ -100,6 +102,8 @@ public class SingaporeData {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Screenshot of a demo app](at.png)
     public var airTemperature: SingaporeDataResult<EnvironmentData> = .none
     
     /// Get precipitation readings from across Singapore.
@@ -146,6 +150,8 @@ public class SingaporeData {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Screenshot of a demo app](rf.png)
     public var rainfall: SingaporeDataResult<EnvironmentData> = .none
     
     /// Get air quality readings from across Singapore.
@@ -238,6 +244,8 @@ public class SingaporeData {
     ///    }
     ///}
     /// ```
+    ///
+    /// ![Screenshot of a demo app](aq.png)
     public var airQuality: SingaporeDataResult<AirQuality.RetrievedData> = .none
     
     /// Get UV Index readings from all 5 regions of Singapore.
@@ -297,6 +305,8 @@ public class SingaporeData {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Screenshot of a demo app](uvi.png)
     public var uvIndex: SingaporeDataResult<UVIndex> = .none
     
     public var twentyFourHourWeather: SingaporeDataResult<[TwentyFourHourWeather.Record]> = .none
@@ -339,6 +349,8 @@ public class SingaporeData {
     ///     }
     /// }
     /// ```
+    ///
+    /// ![Screenshot of a demo app](2h.png)
     public var twoHourWeather: SingaporeDataResult<[TwoHourForecast.Forecasts]> = .none
     
     public var fourDayForecast: SingaporeDataResult<FourDayForecast> = .none
@@ -388,6 +400,9 @@ public class SingaporeData {
     ///         }
     ///     }
     /// }
+    /// ```
+    ///
+    /// ![Screenshot of a demo app](ca.png)
     public var carparkAvailability: SingaporeDataResult<CarparkAvailability> = .none
     
     /// Get traffic images from traffic cameras across Singapore.
@@ -434,6 +449,9 @@ public class SingaporeData {
     ///         }
     ///     }
     /// }
+    /// ```
+    ///
+    /// ![Screenshot of a demo app](ti.png)
     public var trafficImages: SingaporeDataResult<TrafficImages> = .none
     
     /// Get available taxis across Singapore.
@@ -489,6 +507,9 @@ public class SingaporeData {
     ///         }
     ///     }
     /// }
+    /// ```
+    ///
+    /// ![Screenshot of a demo app](taxis.png)
     public var availableTaxis: SingaporeDataResult<AvailableTaxis> = .none
     
     internal var dateOption: DateOption?

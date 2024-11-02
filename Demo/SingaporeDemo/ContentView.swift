@@ -67,7 +67,7 @@ struct ContentView: View {
                         FourDayForecastView()
                             .navigationTitle("4 Day Forecast")
                     } label: {
-                        Label(("24 Hour Forecast"), systemImage: "calendar")
+                        Label(("4 Day Forecast"), systemImage: "calendar")
                     }
                 }
                 
