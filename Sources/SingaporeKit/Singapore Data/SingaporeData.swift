@@ -173,7 +173,7 @@ public class SingaporeData {
     ///
     /// Using the success parameter, you can access the data and display it in your SwiftUI view.
     ///
-    /// In the following examplem you can retrieve the latest air quality data and display it in a SwiftUI view.
+    /// In the following example, you can retrieve the latest air quality data and display it in a SwiftUI view.
     ///
     /// ```swift
     /// struct AirQualityView: View {
@@ -259,7 +259,7 @@ public class SingaporeData {
     /// For more information, visit the [data.gov.sg](https://data.gov.sg/datasets?formats=API).
     ///
     /// ## Usage
-    /// Use the `@Singapore` property wrapper to access the air temperature data.
+    /// Use the `@Singapore` property wrapper to access the UV index data.
     ///
     /// You can use a Switch statement to handle the different states of the data:
     /// - `.none`: The data has not been loaded yet.
@@ -309,6 +309,101 @@ public class SingaporeData {
     /// ![Screenshot of a demo app](uvi.png)
     public var uvIndex: SingaporeDataResult<UVIndex> = .none
     
+    /// Retrieve the latest 24 hour weather forecast
+    ///
+    /// For more information, visit the [data.gov.sg](https://data.gov.sg/datasets?formats=API).
+    ///
+    /// ## Usage
+    /// Use the `@Singapore` property wrapper to access the 24 hour weather data.
+    ///
+    /// You can use a Switch statement to handle the different states of the data:
+    /// - `.none`: The data has not been loaded yet.
+    /// - `.loading`: The data is currently being loaded.
+    /// - `.failure`: The data failed to load.
+    /// - `.success`: The data has been successfully loaded.
+    ///
+    /// Using the success parameter, you can access the data and display it in your SwiftUI view.
+    ///
+    /// ```swift
+    /// struct TwentyFourHourForecastView: View {
+    ///
+    ///     @Singapore(\.twentyFourHourWeather) var twentyFourHourWeather
+    ///
+    ///     var body: some View {
+    ///         switch twentyFourHourWeather {
+    ///         case .none, .loading:
+    ///             ProgressView()
+    ///         case .failure(let error):
+    ///             Text("Failed to Load: \(error.description)")
+    ///         case .success(let data):
+    ///             let data = data.current!
+    ///
+    ///             List {
+    ///                 Section("General Forecast") {
+    ///                     LabeledContent("Weather") {
+    ///                         Label(data.general.weather.description, systemImage: data.general.weather.systemImage)
+    ///                     }
+    ///
+    ///                     LabeledContent("Relative Humidity (High)") {
+    ///                         Text("\(String(format: "%.1f", data.general.relativeHumidity.high))%")
+    ///                     }
+    ///
+    ///                     LabeledContent("Relative Humidity (Low)") {
+    ///                         Text("\(String(format: "%.1f", data.general.relativeHumidity.low))%")
+    ///                     }
+    ///
+    ///                     LabeledContent("Temperature (Low)") {
+    ///                         Text("\(String(format: "%.1f", data.general.temperature.low))℃")
+    ///                     }
+    ///
+    ///                     LabeledContent("Temperature (High)") {
+    ///                         Text("\(String(format: "%.1f", data.general.temperature.high))℃")
+    ///                     }
+    ///
+    ///                     LabeledContent("Wind Speed (Low)") {
+    ///                         Text("\(String(format: "%.1f", data.general.wind.low)) km/h")
+    ///                     }
+    ///
+    ///                     LabeledContent("Wind Speed (High)") {
+    ///                         Text("\(String(format: "%.1f", data.general.wind.high)) km/h")
+    ///                     }
+    ///
+    ///                     LabeledContent("Wind Direction") {
+    ///                         Text(data.general.wind.direction.description)
+    ///                     }
+    ///
+    ///                 }
+    ///
+    ///                 ForEach(data.detailedForecasts) { forecast in
+    ///                     Section(forecast.timePeriod.description) {
+    ///                         LabeledContent("N") {
+    ///                             Label(forecast.north.description, systemImage: forecast.north.systemImage)
+    ///                         }
+    ///
+    ///                         LabeledContent("S") {
+    ///                             Label(forecast.south.description, systemImage: forecast.south.systemImage)
+    ///                         }
+    ///
+    ///                         LabeledContent("E") {
+    ///                             Label(forecast.east.description, systemImage: forecast.east.systemImage)
+    ///                         }
+    ///
+    ///                         LabeledContent("W") {
+    ///                             Label(forecast.west.description, systemImage: forecast.west.systemImage)
+    ///                         }
+    ///
+    ///                         LabeledContent("Central") {
+    ///                             Label(forecast.central.description, systemImage: forecast.central.systemImage)
+    ///                         }
+    ///                     }
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Screenshot of a demo app](24h.png)
     public var twentyFourHourWeather: SingaporeDataResult<[TwentyFourHourWeather.Record]> = .none
     
     /// Retrieve the two-hour weather forecast for Singapore.
@@ -316,7 +411,7 @@ public class SingaporeData {
     /// For more information, visit the [data.gov.sg](https://data.gov.sg/datasets?formats=API).
     ///
     /// ## Usage
-    /// Use the `@Singapore` property wrapper to access the air temperature data.
+    /// Use the `@Singapore` property wrapper to access the two-hour weather data.
     ///
     /// You can use a Switch statement to handle the different states of the data:
     /// - `.none`: The data has not been loaded yet.
@@ -353,6 +448,75 @@ public class SingaporeData {
     /// ![Screenshot of a demo app](2h.png)
     public var twoHourWeather: SingaporeDataResult<[TwoHourForecast.Forecasts]> = .none
     
+    /// Retrieve the latest 4 day weather forecast
+    ///
+    /// For more information, visit the [data.gov.sg](https://data.gov.sg/datasets?formats=API).
+    ///
+    /// ## Usage
+    /// Use the `@Singapore` property wrapper to access the 4 day weather forecast data.
+    ///
+    /// You can use a Switch statement to handle the different states of the data:
+    /// - `.none`: The data has not been loaded yet.
+    /// - `.loading`: The data is currently being loaded.
+    /// - `.failure`: The data failed to load.
+    /// - `.success`: The data has been successfully loaded.
+    ///
+    /// Using the success parameter, you can access the data and display it in your SwiftUI view.
+    ///
+    /// ```swift
+    /// struct FourDayForecastView: View {
+    ///
+    ///     @Singapore(\.fourDayForecast) var fourDayForecast
+    ///
+    ///     var body: some View {
+    ///         switch fourDayForecast {
+    ///         case .none, .loading:
+    ///             ProgressView()
+    ///         case .failure(let error):
+    ///             Text("Failed to Load: \(error.description)")
+    ///         case .success(let data):
+    ///             List {
+    ///                 ForEach(data.forecasts) { forecast in
+    ///                     Section(forecast.day) {
+    ///                         Label(forecast.weather.summary, systemImage: forecast.weather.weather.systemImage)
+    ///
+    ///                         LabeledContent("Relative Humidity (High)") {
+    ///                             Text("\(String(format: "%.1f", forecast.relativeHumidity.high))%")
+    ///                         }
+    ///
+    ///                         LabeledContent("Relative Humidity (Low)") {
+    ///                             Text("\(String(format: "%.1f", forecast.relativeHumidity.low))%")
+    ///                         }
+    ///
+    ///                         LabeledContent("Temperature (Low)") {
+    ///                             Text("\(String(format: "%.1f", forecast.temperature.low))℃")
+    ///                         }
+    ///
+    ///                         LabeledContent("Temperature (High)") {
+    ///                             Text("\(String(format: "%.1f", forecast.temperature.high))℃")
+    ///                         }
+    ///
+    ///                         LabeledContent("Wind Speed (Low)") {
+    ///                             Text("\(String(format: "%.1f", forecast.wind.low)) km/h")
+    ///                         }
+    ///
+    ///                         LabeledContent("Wind Speed (High)") {
+    ///                             Text("\(String(format: "%.1f", forecast.wind.high)) km/h")
+    ///                         }
+    ///
+    ///                         LabeledContent("Wind Direction") {
+    ///                             Text(forecast.wind.direction.description)
+    ///                         }
+    ///
+    ///                     }
+    ///                 }
+    ///             }
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// ![Screenshot of a demo app](4d.png)
     public var fourDayForecast: SingaporeDataResult<FourDayForecast> = .none
     
     /// Get carpark availability at HDB carparks across Singapore.
@@ -362,7 +526,7 @@ public class SingaporeData {
     /// For more information, visit the [data.gov.sg](https://data.gov.sg/datasets?formats=API).
     ///
     /// ## Usage
-    /// Use the `@Singapore` property wrapper to access the air temperature data.
+    /// Use the `@Singapore` property wrapper to access the carpark availability data.
     ///
     /// You can use a Switch statement to handle the different states of the data:
     /// - `.none`: The data has not been loaded yet.
