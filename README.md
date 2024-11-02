@@ -1,5 +1,13 @@
 # `@Singapore`
+
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjiachenyee%2FSingaporeKit%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/jiachenyee/SingaporeKit)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjiachenyee%2FSingaporeKit%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/jiachenyee/SingaporeKit)
+
+[Read the Documentation](https://swiftpackageindex.com/jiachenyee/SingaporeKit/main/documentation/singaporekit)
+
 SingaporeKit makes it easy to use Singapore government data within your SwiftUI projects. Using the `@Singapore` property wrapper, you can retrieve real-time government data from [data.gov.sg](https://data.gov.sg/datasets?formats=API).
+
+![Screenshots](Sources/SingaporeKit/SingaporeKit.docc/Resources/screenshots.png)
 
 ## using `@Singapore`
 Use the `@Singapore` property wrapper to retrieve any [data.gov.sg real-time API](https://data.gov.sg/datasets?formats=API) value.
